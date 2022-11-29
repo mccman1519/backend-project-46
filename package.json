@@ -5,7 +5,7 @@
   "description": "[![Actions Status](https://github.com/mccman1519/backend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/mccman1519/backend-project-46/actions)",
   "main": "src/diff.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "bin": {
     "gendiff": "bin/gendiff.js"
