@@ -7,6 +7,9 @@
   "scripts": {
     "test": "make test"
   },
+  "jest": {
+    "testPathIgnorePatterns": ["src", "expectations.js"]
+  },
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
