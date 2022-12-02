@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import fs from 'fs';
+import path from 'path';
+import { parseJSON, parseYAML } from './parsers.js';
+import { getCompareMode, getFileType } from './utils/utils.js';
 
 const diff = (object1, object2) => {
   const object2Keys = _.sortBy(Object.keys(object2));
@@ -31,13 +33,29 @@ const diff = (object1, object2) => {
 };
 
 export default (filePath1, filePath2) => {
-  const parsedFile1 = JSON.parse(fs.readFileSync(filePath1, 'utf-8'));
-  const parsedFile2 = JSON.parse(fs.readFileSync(filePath2, 'utf-8'));
+  const parsedData = {};
+  const compareMode = getCompareMode(
+    getFileType(filePath1),
+    getFileType(filePath2),
+  );
 
   let result = '';
   const spacing = '  ';
 
-  diff(parsedFile1, parsedFile2).forEach((item) => {
+  switch (compareMode) {
+  case 'json':
+    parsedData.file1 = parseJSON(filePath1);
+    parsedData.file2 = parseJSON(filePath2);
+    break;
+  case 'yaml':
+    parsedData.file1 = parseYAML(filePath1) ?? '';
+    parsedData.file2 = parseYAML(filePath2) ?? '';
+    break;
+  default:
+    throw (new Error(`Unsupported file type '${compareMode}'`));
+  }
+
+  diff(parsedData.file1, parsedData.file2).forEach((item) => {
     const [sign, key, value] = item;
     result = `${result}\n${spacing}${sign} ${key}: ${value}`;
   });
