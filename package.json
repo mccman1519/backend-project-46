@@ -8,7 +8,10 @@
     "test": "make test"
   },
   "jest": {
-    "testPathIgnorePatterns": ["src", "expectations.js"]
+    "testPathIgnorePatterns": [
+      "src",
+      "expectations.js"
+    ]
   },
   "bin": {
     "gendiff": "bin/gendiff.js"
@@ -25,6 +28,7 @@
   "homepage": "https://github.com/mccman1519/backend-project-46#readme",
   "dependencies": {
     "commander": "^9.4.1",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
