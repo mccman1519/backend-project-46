@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import path from 'path';
 import { parseJSON, parseYAML } from './parsers.js';
 import { getCompareMode, getFileType } from './utils/utils.js';
 
