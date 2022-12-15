@@ -1,10 +1,15 @@
 /* eslint-disable no-undef */
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import expectation from '../__fixtures__/expectation.js';
 import diff from '../src/diff.js';
-import expectation from './__fixtures__/expectation.js';
 
-const fpJSON = '__tests__/__fixtures__/json/';
-const fpYAML = '__tests__/__fixtures__/yaml/';
-const fpCommon = '__tests__/__fixtures__/common/';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const fpJSON = `${__dirname}/../__fixtures__/json/`;
+const fpYAML = `${__dirname}/../__fixtures__/yaml/`;
+const fpCommon = `${__dirname}/../___fixtures_/common/`;
 
 describe('Test JSON', () => {
   test('diff #1', () => {
