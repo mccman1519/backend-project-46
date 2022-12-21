@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { parseJSON, parseYAML } from './parsers.js';
 import { getCompareMode, getFileType } from './utils/utils.js';
+import stylish from './formatter/stylish.js';
 
 const diff = (object1, object2) => {
   const object2Keys = _.sortBy(Object.keys(object2));
@@ -38,9 +39,6 @@ export default (filePath1, filePath2) => {
     getFileType(filePath2),
   );
 
-  let result = '';
-  const spacing = '  ';
-
   switch (compareMode) {
   case 'json':
     parsedData.file1 = parseJSON(filePath1);
@@ -54,10 +52,7 @@ export default (filePath1, filePath2) => {
     throw (new Error(`Unsupported file type '${compareMode}'`));
   }
 
-  diff(parsedData.file1, parsedData.file2).forEach((item) => {
-    const [sign, key, value] = item;
-    result = `${result}\n${spacing}${sign} ${key}: ${value}`;
-  });
+  const arrayDiff = diff(parsedData.file1, parsedData.file2);
 
-  return `\n{${result}\n}`;
+  return `\n{${stylish(arrayDiff)}\n}`;
 };
