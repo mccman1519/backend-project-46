@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import path from 'path';
 import diff from '../src/diff.js';
-import * as formatter from '../src/formatter/formatter.js';
+import formatter from '../src/formatter/formatter.js';
 
 const program = new Command();
 
