@@ -19,7 +19,7 @@ program
     );
     
     switch (program.opts().format) {
-      case 'stylish': console.log(`\n{${formatter.stylish(diffResult)}\n}`);
+      case 'stylish': console.log(`${formatter.stylish(diffResult)}`);
         break;
       default:
          break;
