@@ -1,5 +1,5 @@
 import stylish from './stylish.js';
 
-export {
+export default {
   stylish,
 };

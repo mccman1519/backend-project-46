@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable import/prefer-default-export */
 import path from 'path';
 
@@ -24,39 +25,39 @@ const isRealObject = (value) => getExactType(value) === 'Object';
 
 const arrayToStrDeep = (array) => {
   let first = true;
-  const result = array.map(item => {
+  const result = array.map((item) => {
     // Is replaceble with Array.isArray()?
-    if (getExactType(item) !== 'Array') {      
+    if (getExactType(item) !== 'Array') {
       return `${first ? (first = false, '') : ''}${item}`;
     }
     return `${first ? (first = false, '') : ''}${arrayToStrDeep(item)}`;
   });
 
-  return `[${result}]`;  
+  return `[${result}]`;
 };
 
 const stringify = (data, spacer = ' ', spacesCount = 2) => {
   if (typeof data !== 'object') return data.toString(); // dead code?
   const initCount = spacesCount;
-  
-  const proc = (data, spacer, spacesCount) => {
-    let spaces = spacer.repeat(spacesCount);
-    const result = Object.entries(data).reduce((acc, [key, value]) => {  
+
+  const proc = (procData, procSpacer, procSpacesCount) => {
+    let spaces = procSpacer.repeat(procSpacesCount);
+    const result = Object.entries(procData).reduce((acc, [key, value]) => {
       const valueType = getExactType(value);
-      
+
       if (valueType === 'Object') {
-        return `${acc}${spaces}${key}: ${proc(value, spacer, spacesCount + 4)}\n`;
+        return `${acc}${spaces}${key}: ${proc(value, procSpacer, procSpacesCount + 4)}\n`;
       }
-      
+
       let ret = `${value}`;
       if (valueType === 'Array') {
         ret = `${arrayToStrDeep(value)}`;
       }
-      
+
       return `${acc}${spaces}${key}: ${ret}\n`;
     }, '');
-    // Исправить пробелы перед закрывающей скобкой
-    spaces = spacer.repeat(spacesCount - 4);
+    spaces = procSpacer.repeat(procSpacesCount - 4);
+
     return `{\n${result}${spaces}}`;
   };
   return proc(data, spacer, initCount);

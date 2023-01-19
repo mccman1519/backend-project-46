@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable indent */
 import { Command } from 'commander';
 import path from 'path';
 import diff from '../src/diff.js';
@@ -17,7 +18,7 @@ program
       path.resolve(process.cwd(), filepath1),
       path.resolve(process.cwd(), filepath2),
     );
-    
+
     switch (program.opts().format) {
       case 'stylish': console.log(`${formatter.stylish(diffResult)}`);
         break;

@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import expectation from '../__fixtures__/expectation.js';
 import diff from '../src/diff.js';
-import * as formatter from '../src/formatter/formatter.js';
+import formatter from '../src/formatter/formatter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
