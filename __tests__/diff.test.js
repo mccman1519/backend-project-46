@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import expectation from '../__fixtures__/expectation.js';
 import diff from '../src/diff.js';
-import formatter from '../src/formatter/formatter.js';
+import formatter from '../src/formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,18 +13,24 @@ const fpYAML = `${__dirname}/../__fixtures__/yaml/`;
 const fpCommon = `${__dirname}/../___fixtures_/common/`;
 
 describe('Test JSON', () => {
-  test('diff #1', () => {
-    const path1 = `${fpJSON}file1.json`;
-    const path2 = `${fpJSON}file2.json`;
-    expect(`${formatter.stylish(diff(path1, path2))}`).toEqual(expectation);
+  const path1 = `${fpJSON}file1.json`;
+  const path2 = `${fpJSON}file2.json`;
+  test('stylish', () => {
+    expect(`${formatter.stylish(diff(path1, path2))}`).toEqual(expectation.stylish);
+  });
+  test('plain', () => {
+    expect(`${formatter.plain(diff(path1, path2))}`).toEqual(expectation.plain);
   });
 });
 
 describe('Test YAML', () => {
-  test('diff #1', () => {
-    const path1 = `${fpYAML}file1.yaml`;
-    const path2 = `${fpYAML}file2.yml`;
-    expect(`${formatter.stylish(diff(path1, path2))}`).toEqual(expectation);
+  const path1 = `${fpYAML}file1.yaml`;
+  const path2 = `${fpYAML}file2.yml`;
+  test('stylish', () => {
+    expect(`${formatter.stylish(diff(path1, path2))}`).toEqual(expectation.stylish);
+  });
+  test('plain', () => {
+    expect(`${formatter.plain(diff(path1, path2))}`).toEqual(expectation.plain);
   });
 });
 

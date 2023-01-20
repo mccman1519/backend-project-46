@@ -7,7 +7,7 @@ const diff = (object1, object2) => {
   const arrDiff = Object.keys(object1)
     .reduce((acc, key) => {
       if (!Object.hasOwn(object2, key)) {
-        // no such key in object2
+        // Removed
         acc.push(['-', key, object1[key]]);
       } else {
         // where is a key, check values
@@ -17,8 +17,12 @@ const diff = (object1, object2) => {
           if (isRealObject(object1[key]) && isRealObject(object2[key])) {
             acc.push([' ', key, diff(object1[key], object2[key])]);
           } else {
-            acc.push(['-', key, object1[key]]);
-            acc.push(['+', key, object2[key]]);
+            // вместо +- на двух строках сделать одну u со старым значением
+            // Было:
+            // acc.push(['-', key, object1[key]]);
+            // acc.push(['+', key, object2[key]]);
+            // Стало ([feature, key, value, oldValue]):
+            acc.push(['u', key, object2[key], object1[key]]);
           }
         } else {
           acc.push([' ', key, object1[key]]);

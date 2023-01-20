@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import path from 'path';
 import diff from '../src/diff.js';
-import formatter from '../src/formatter/formatter.js';
+import formatter from '../src/formatters/index.js';
 
 const program = new Command();
 
@@ -21,6 +21,8 @@ program
 
     switch (program.opts().format) {
       case 'stylish': console.log(`${formatter.stylish(diffResult)}`);
+        break;
+      case 'plain': console.log(`${formatter.plain(diffResult)}`);
         break;
       default:
          break;
