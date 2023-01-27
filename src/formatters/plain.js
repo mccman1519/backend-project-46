@@ -1,39 +1,37 @@
-import { isRealObject } from '../utils/utils.js';
+import _ from 'lodash';
+
+const formatValue = (value) => {
+  if (_.isString(value)) return `'${value}'`;
+  if (_.isObject(value)) return '[complex value]';
+  return value;
+};
 
 export default (arrayDiff) => {
-  console.dir(arrayDiff, { depth: 15 });
+  // console.dir(arrayDiff, { depth: 15 });
 
-  const unfold = (nested) => {
+  const unfold = (nested, parrent) => {
     const result = nested.reduce((acc, item) => {
-      const [feature, key, , oldValue] = item;
-      let [, , value] = item;
+      const [feature, prop, value, oldValue] = item;
+      const deeperParrent = parrent ? `${parrent}.${prop}` : `Property '${prop}`;
 
-      if (Array.isArray(value)) {
-        return `${acc}${key}${unfold(value)}.`;
+      if (_.isArray(value)) {
+        return `${acc}${unfold(value, deeperParrent)}`;
       }
 
-      if (isRealObject(value) || isRealObject(oldValue)) {
-        // Complex value
-        value = '[complex value]';
-      } else {
-        value = `'${value}'`;
-      }
-
-      // Not object value
       if (feature === '+') {
-        return `${acc}.${key} was added with value: ${value}\n`;
+        return `${acc}${deeperParrent}' was added with value: ${formatValue(value)}\n`;
       }
       if (feature === '-') {
-        return `${acc}.${key} was removed\n`;
+        return `${acc}${deeperParrent}' was removed\n`;
       }
       if (feature === 'u') {
-        return `${acc}.${key} was updated. From ${oldValue} to ${value}\n`;
+        return `${acc}${deeperParrent}' was updated. From ${formatValue(oldValue)} to ${formatValue(value)}\n`;
       }
-      return ''; // No changes
-    }, 'Property ');
+      return `${acc}`;
+    }, '');
 
     return `${result}`;
   };
 
-  return `\n${unfold(arrayDiff)}`;
+  return `\n${unfold(arrayDiff).trim()}`;
 };
