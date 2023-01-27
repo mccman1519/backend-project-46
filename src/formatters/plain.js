@@ -7,8 +7,6 @@ const formatValue = (value) => {
 };
 
 export default (arrayDiff) => {
-  // console.dir(arrayDiff, { depth: 15 });
-
   const unfold = (nested, parrent) => {
     const result = nested.reduce((acc, item) => {
       const [feature, prop, value, oldValue] = item;
