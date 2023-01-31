@@ -21,6 +21,9 @@ describe('Test JSON', () => {
   test('plain', () => {
     expect(`${formatter.plain(diff(path1, path2))}`).toEqual(expectation.plain);
   });
+  test('json', () => {
+    expect(`${formatter.json(diff(path1, path2))}`).toEqual(expectation.json);
+  });
 });
 
 describe('Test YAML', () => {
@@ -31,6 +34,9 @@ describe('Test YAML', () => {
   });
   test('plain', () => {
     expect(`${formatter.plain(diff(path1, path2))}`).toEqual(expectation.plain);
+  });
+  test('json', () => {
+    expect(`${formatter.json(diff(path1, path2))}`).toEqual(expectation.json);
   });
 });
 
