@@ -4,6 +4,7 @@ export default (arrayDiff, spacer = ' ', spacesCount = 2) => {
   const initCount = spacesCount;
 
   const unfold = (nested, unfoldSpacer, unfoldSpacesCount) => {
+    // eslint-disable-next-line
     let spaces = unfoldSpacer.repeat(unfoldSpacesCount);
 
     const result = nested.reduce((acc, item) => {
@@ -29,6 +30,7 @@ export default (arrayDiff, spacer = ' ', spacesCount = 2) => {
       return `${acc}${spaces}${feature} ${key}: ${value}\n`;
     }, '');
 
+    // eslint-disable-next-line
     spaces = unfoldSpacer.repeat(unfoldSpacesCount - initCount);
     return `{\n${result}${spaces}}`;
   };

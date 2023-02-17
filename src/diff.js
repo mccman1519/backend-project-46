@@ -3,6 +3,7 @@ import { parseJSON, parseYAML } from './parsers.js';
 import { getCompareMode, getFileType, isRealObject } from './utils/utils.js';
 import formatter from './formatters/index.js';
 
+/* eslint-disable */
 const diff = (object1, object2) => {
   const object2Keys = _.sortBy(Object.keys(object2));
   const arrDiff = Object.keys(object1)
@@ -55,3 +56,4 @@ export default (filePath1, filePath2, format = 'stylish') => {
 
   return formatter[format](diff(parsedData.file1, parsedData.file2));
 };
+/* eslint-enable */

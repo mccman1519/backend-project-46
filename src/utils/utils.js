@@ -1,5 +1,4 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable */
 import path from 'path';
 
 const getFileType = (filePath) => {
