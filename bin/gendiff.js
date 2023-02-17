@@ -24,7 +24,10 @@ program
         break;
       case 'plain': console.log(`${formatter.plain(diffResult)}`);
         break;
+      case 'json': console.log(`${formatter.json(diffResult)}`);
+        break;
       default:
+        console.log(`Unrecognized option '${program.opts().format}'`);
          break;
     }
   });

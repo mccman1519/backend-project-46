@@ -13,8 +13,7 @@ export default (arrayDiff, spacer = ' ', spacesCount = 2) => {
       }
 
       if (isRealObject(value) || isRealObject(oldValue)) {
-        // Unfold object here
-        if (feature === 'u') { // <--- this
+        if (feature === 'u') {
           const updated = `${spaces}- ${key}: ${stringify(oldValue, unfoldSpacer, unfoldSpacesCount + initCount + 4)}\n`;
           const updatedWith = `${spaces}+ ${key}: ${stringify(value, unfoldSpacer, unfoldSpacesCount + initCount + 4)}\n`;
           return `${acc}${updated}${updatedWith}`;
@@ -22,8 +21,7 @@ export default (arrayDiff, spacer = ' ', spacesCount = 2) => {
         return `${acc}${spaces}${feature} ${key}: ${stringify(value, unfoldSpacer, unfoldSpacesCount + initCount + 4)}\n`;
       }
 
-      // Not object
-      if (feature === 'u') { // <--- and this
+      if (feature === 'u') {
         const updated = `${spaces}- ${key}: ${oldValue}\n`;
         const updatedWith = `${spaces}+ ${key}: ${value}\n`;
         return `${acc}${updated}${updatedWith}`;

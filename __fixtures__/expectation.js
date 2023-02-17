@@ -61,12 +61,7 @@ Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]`,
 
-  json: `
-{
-  "files": [
-    "filePath1",
-    "filePath2"
-  ],
+  json: `{
   "diffs": [
     {
       "path": "common.follow",
@@ -100,7 +95,7 @@ Property 'group3' was added with value: [complex value]`,
       "path": "common.setting5",
       "diff": {
         "type": "+",
-        "value": "{\n            \"key5\": \"value5\"\n          }"
+        "value": "{\\"key5\\":\\"value5\\"}"
       }
     },
     {
@@ -131,7 +126,7 @@ Property 'group3' was added with value: [complex value]`,
       "diff": {
         "type": "u",
         "value": "str",
-        "oldValue": "{\n            \"key\": \"value\"\n          }"
+        "oldValue": "{\\"key\\":\\"value\\"}"
       }
     },
     {
@@ -144,7 +139,7 @@ Property 'group3' was added with value: [complex value]`,
       "path": "group3",
       "diff": {
         "type": "+",
-        "value": "{\n            \"deep\": {\n              \"id\": {\n                \"number\": 45\n              }\n            },\n            \"fee\": 100500\n          }"
+        "value": "{\\"deep\\":{\\"id\\":{\\"number\\":45}},\\"fee\\":100500}"
       }
     }
   ]
