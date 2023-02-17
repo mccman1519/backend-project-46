@@ -31,5 +31,5 @@ export default (arrayDiff) => {
     return `${result}`;
   };
 
-  return `\n${unfold(arrayDiff).trim()}`;
+  return `${unfold(arrayDiff).trim()}`;
 };

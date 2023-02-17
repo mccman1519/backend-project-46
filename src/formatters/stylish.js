@@ -33,5 +33,5 @@ export default (arrayDiff, spacer = ' ', spacesCount = 2) => {
     return `{\n${result}${spaces}}`;
   };
 
-  return `\n${unfold(arrayDiff, spacer, spacesCount)}`;
+  return `${unfold(arrayDiff, spacer, spacesCount)}`;
 };
