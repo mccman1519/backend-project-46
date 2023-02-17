@@ -3,7 +3,6 @@
 import { Command } from 'commander';
 import path from 'path';
 import diff from '../src/diff.js';
-import formatter from '../src/formatters/index.js';
 
 const program = new Command();
 
@@ -17,8 +16,12 @@ program
     const diffResult = diff(
       path.resolve(process.cwd(), filepath1),
       path.resolve(process.cwd(), filepath2),
+      program.opts().format,
     );
 
+    console.log(diffResult);
+
+    /*
     switch (program.opts().format) {
       case 'stylish': console.log(`${formatter.stylish(diffResult)}`);
         break;
@@ -30,6 +33,7 @@ program
         console.log(`Unrecognized option '${program.opts().format}'`);
          break;
     }
+    */
   });
 
 program.parse();

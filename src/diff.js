@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { parseJSON, parseYAML } from './parsers.js';
 import { getCompareMode, getFileType, isRealObject } from './utils/utils.js';
+import formatter from './formatters/index.js';
 
 const diff = (object1, object2) => {
   const object2Keys = _.sortBy(Object.keys(object2));
@@ -32,7 +33,7 @@ const diff = (object1, object2) => {
   });
 };
 
-export default (filePath1, filePath2) => {
+export default (filePath1, filePath2, format) => {
   const parsedData = {};
   const compareMode = getCompareMode(
     getFileType(filePath1),
@@ -52,5 +53,5 @@ export default (filePath1, filePath2) => {
     throw (new Error(`Unsupported file type '${compareMode}'`));
   }
 
-  return diff(parsedData.file1, parsedData.file2);
+  return formatter[format](diff(parsedData.file1, parsedData.file2));
 };
