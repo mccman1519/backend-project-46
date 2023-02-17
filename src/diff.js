@@ -33,7 +33,7 @@ const diff = (object1, object2) => {
   });
 };
 
-export default (filePath1, filePath2, format) => {
+export default (filePath1, filePath2, format = 'stylish') => {
   const parsedData = {};
   const compareMode = getCompareMode(
     getFileType(filePath1),
